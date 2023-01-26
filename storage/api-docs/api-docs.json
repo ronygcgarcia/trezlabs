@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel OpenApi Demo Documentation",
-        "description": "L5 Swagger OpenApi description",
+        "title": "API Documentation",
+        "description": "Trez labs test",
         "contact": {
-            "email": "admin@admin.com"
+            "email": "ronygcgarcia@gmail.com"
         },
         "license": {
             "name": "Apache 2.0",
@@ -367,22 +367,6 @@
                     }
                 }
             }
-        },
-        "/": {
-            "get": {
-                "description": "Home page",
-                "responses": {
-                    "default": {
-                        "description": "Welcome page"
-                    }
-                }
-            }
         }
-    },
-    "tags": [
-        {
-            "name": "Projects",
-            "description": "API Endpoints of Projects"
-        }
-    ]
+    }
 }

@@ -16,7 +16,7 @@ cp .env.example .env
 ```
 
 ### Enviroment variables
-| Variables| Descripción|  
+| Variables| Description|  
 | ----------- | -----------|
 |APP_NAME                             |The system name tha will display.
 |APP_ENV 	                                 |System enviroment.
@@ -46,6 +46,8 @@ Compile documentation:
 ```bash
 php artisan l5-swagger:generate
 ``` 
+## Database schema
+![Database schema](./DatabaseSchema.jpeg "Database schema")
 
 ## Database commands
 Run migrations

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookListStoreRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
@@ -33,9 +36,22 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
-        //
+        $book = Book::create($request->all());
+        return $book;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeBookList(BookListStoreRequest $request)
+    {
+        Book::insert($request->all());
+        return response()->json(["message" => "Books created"], Response::HTTP_CREATED);
     }
 
     /**

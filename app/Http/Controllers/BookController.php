@@ -21,6 +21,7 @@ class BookController extends Controller
      * @OA\Get(
      *   tags={"Book"},
      *   path="/books",    
+     *   security={{"bearerAuth":{}}},
      *   @OA\Response(
      *       response=200,
      *       description="List of books",
@@ -83,6 +84,7 @@ class BookController extends Controller
      * @OA\Get(
      *   tags={"Book"},
      *   path="/books/favorites",    
+     *   security={{"bearerAuth":{}}},
      *   @OA\Response(
      *       response=200,
      *       description="List of favorite books",
@@ -139,6 +141,7 @@ class BookController extends Controller
      * @OA\Post(
      *   tags={"Book"},
      *   path="/books",
+     *   security={{"bearerAuth":{}}},
      *   @OA\RequestBody(
      *      required=true,
      *      @OA\MediaType(
@@ -225,6 +228,7 @@ class BookController extends Controller
      * @OA\Post(
      *   tags={"Book"},
      *   path="/books/{book_id}/favorite",
+     *   security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="book_id",
      *         description="Book id to add to favorite list",
@@ -268,6 +272,7 @@ class BookController extends Controller
      * @OA\Post(
      *   tags={"Book"},
      *   path="/books/list",
+     *   security={{"bearerAuth":{}}},
      *   @OA\RequestBody(
      *      required=true,
      *      @OA\MediaType(
@@ -331,6 +336,7 @@ class BookController extends Controller
      * @OA\Delete(
      *   tags={"Book"},
      *   path="/books/{book_id}",
+     *   security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="book_id",
      *         description="Book id to delete",

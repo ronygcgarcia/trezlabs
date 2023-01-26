@@ -1,0 +1,416 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "description": "Trez labs test",
+        "contact": {
+            "email": "ronygcgarcia@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "User email",
+                                            "type": "string",
+                                            "example": "1|0CyrUxPJMArqAqCDfqQklOebSDpv07aj7Kkf8HxW"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books": {
+            "get": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "28b9632495ac5f6f66b2e52001d510e6",
+                "responses": {
+                    "200": {
+                        "description": "List of books",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Book id",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "description": "Book title",
+                                                "type": "string",
+                                                "example": "Title"
+                                            },
+                                            "description": {
+                                                "description": "Book description",
+                                                "type": "string",
+                                                "example": "Description"
+                                            },
+                                            "genre_id": {
+                                                "description": "Id of book genre",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "genre": {
+                                                "description": "Book genre name",
+                                                "type": "string",
+                                                "example": "Genre"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "b10f5fe35eefa47e974dd4b333d870b1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Book title",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Book description",
+                                        "type": "string"
+                                    },
+                                    "genre_id": {
+                                        "description": "Book genre id",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "Book id",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "description": "Book title",
+                                            "type": "string",
+                                            "example": "Title"
+                                        },
+                                        "description": {
+                                            "description": "Book description",
+                                            "type": "string",
+                                            "example": "Description"
+                                        },
+                                        "genre_id": {
+                                            "description": "Id of book genre",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "updated_at": {
+                                            "description": "Date of update",
+                                            "type": "string",
+                                            "example": "2023-01-26T02:29:13.000000Z"
+                                        },
+                                        "created_at": {
+                                            "description": "Date of creation",
+                                            "type": "string",
+                                            "example": "2023-01-26T02:29:13.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/favorites": {
+            "get": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "ab42652ec790f9196fb37ae2ed1416b4",
+                "responses": {
+                    "200": {
+                        "description": "List of favorite books",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Book id",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "description": "Book title",
+                                                "type": "string",
+                                                "example": "Title"
+                                            },
+                                            "description": {
+                                                "description": "Book description",
+                                                "type": "string",
+                                                "example": "Description"
+                                            },
+                                            "genre_id": {
+                                                "description": "Id of book genre",
+                                                "type": "integer",
+                                                "example": 1
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/{book_id}/favorite": {
+            "post": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "fe269b8942d424e871a9baa7798ceba2",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "description": "Book id to add to favorite list",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Books added to favorites"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/list": {
+            "post": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "c57b8f131e120d76059ac2f766e56268",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "title": {
+                                            "description": "Book title",
+                                            "type": "string",
+                                            "example": "Title"
+                                        },
+                                        "description": {
+                                            "description": "Book description",
+                                            "type": "string",
+                                            "example": "Description"
+                                        },
+                                        "genre_id": {
+                                            "description": "Id of book genre",
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User logged",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Books created"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/books/{book_id}": {
+            "delete": {
+                "tags": [
+                    "Book"
+                ],
+                "operationId": "28f3c77ce2404b0ffbe741ec3ebc97d1",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "description": "Book id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Book deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            },
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

@@ -359,6 +359,14 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        $favorite = $book->users;
+        error_log(!count($favorite));
+
+        if(count($favorite)) {
+            return response()->json([
+                'message' => "It is not possible to delete this book as it is associated with another record"
+            ], Response::HTTP_BAD_REQUEST);
+        }
         $book->delete();
         return response()->json(["message" => "Book deleted"], Response::HTTP_OK);
     }

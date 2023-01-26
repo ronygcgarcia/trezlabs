@@ -17,6 +17,55 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *   tags={"Book"},
+     *   path="/books",    
+     *   @OA\Response(
+     *       response=200,
+     *       description="List of books",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(    
+     *               type="array",          
+     *               @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="id",
+     *                         description="Book id",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *                    @OA\Property(
+     *                         property="title",
+     *                         description="Book title",
+     *                         type="string",
+     *                         example="Title"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="description",
+     *                         description="Book description",
+     *                         type="string",
+     *                         example="Description"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="genre_id",
+     *                         description="Id of book genre",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *                    @OA\Property(
+     *                         property="genre",
+     *                         description="Book genre name",
+     *                         type="string",
+     *                         example="Genre"
+     *                    ),
+     *               ),
+     *          ),
+     *      ),
+     *   ),
+     * ),
+     */
     public function index()
     {
         $books = Book::orderBy('id')
@@ -29,6 +78,49 @@ class BookController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *   tags={"Book"},
+     *   path="/books/favorites",    
+     *   @OA\Response(
+     *       response=200,
+     *       description="List of favorite books",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(    
+     *               type="array",          
+     *               @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="id",
+     *                         description="Book id",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *                    @OA\Property(
+     *                         property="title",
+     *                         description="Book title",
+     *                         type="string",
+     *                         example="Title"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="description",
+     *                         description="Book description",
+     *                         type="string",
+     *                         example="Description"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="genre_id",
+     *                         description="Id of book genre",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *               ),
+     *          ),
+     *      ),
+     *   ),
+     * ),
      */
     public function favoriteBooks()
     {
@@ -43,6 +135,80 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Post(
+     *   tags={"Book"},
+     *   path="/books",
+     *   @OA\RequestBody(
+     *      required=true,
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *              @OA\Property(
+     *                  property="title",
+     *                  description="Book title",
+     *                  type="string",
+     *              ),
+     *              @OA\Property(
+     *                  property="description",
+     *                  description="Book description",
+     *                  type="string",
+     *              ),
+     *              @OA\Property(
+     *                  property="genre_id",
+     *                  description="Book genre id",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
+     *  ),
+     *   @OA\Response(
+     *       response=201,
+     *       description="Book created",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         description="Book id",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *                    @OA\Property(
+     *                         property="title",
+     *                         description="Book title",
+     *                         type="string",
+     *                         example="Title"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="description",
+     *                         description="Book description",
+     *                         type="string",
+     *                         example="Description"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="genre_id",
+     *                         description="Id of book genre",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *                    @OA\Property(
+     *                         property="updated_at",
+     *                         description="Date of update",
+     *                         type="string",
+     *                         example="2023-01-26T02:29:13.000000Z"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="created_at",
+     *                         description="Date of creation",
+     *                         type="string",
+     *                         example="2023-01-26T02:29:13.000000Z"
+     *                    ),
+     *          ),
+     *      ),
+     *   )
+     * )
+     */
     public function store(BookStoreRequest $request)
     {
         $book = Book::create($request->all());
@@ -54,6 +220,36 @@ class BookController extends Controller
      *
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(
+     *   tags={"Book"},
+     *   path="/books/{book_id}/favorite",
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         description="Book id to add to favorite list",
+     *         in = "path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ) 
+     *     ),  
+     *   @OA\Response(
+     *       response=200,
+     *       description="Returns success message",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *                     @OA\Property(
+     *                         property="message",
+     *                         description="Success message",
+     *                         type="string",
+     *                         example="Books added to favorites"
+     *                    ),                  
+     *          ),
+     *      ),
+     *   )
+     * )
      */
     public function addFavorite(Book $book)
     {
@@ -68,6 +264,57 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Post(
+     *   tags={"Book"},
+     *   path="/books/list",
+     *   @OA\RequestBody(
+     *      required=true,
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(    
+     *               type="array",          
+     *               @OA\Items(
+     *                     type="object",
+     *                    @OA\Property(
+     *                         property="title",
+     *                         description="Book title",
+     *                         type="string",
+     *                         example="Title"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="description",
+     *                         description="Book description",
+     *                         type="string",
+     *                         example="Description"
+     *                    ),
+     *                    @OA\Property(
+     *                         property="genre_id",
+     *                         description="Id of book genre",
+     *                         type="integer",
+     *                         example=1
+     *                    ),
+     *               ),
+     *          ),
+     *      ),
+     *  ),
+     *   @OA\Response(
+     *       response=201,
+     *       description="User logged",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *                     @OA\Property(
+     *                         property="message",
+     *                         description="Success message",
+     *                         type="string",
+     *                         example="Books created"
+     *                    ),     
+     *          ),
+     *      ),
+     *   )
+     * )
+     */
     public function storeBookList(BookListStoreRequest $request)
     {
         Book::insert($request->all());
@@ -79,6 +326,36 @@ class BookController extends Controller
      *
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Delete(
+     *   tags={"Book"},
+     *   path="/books/{book_id}",
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         description="Book id to delete",
+     *         in = "path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ) 
+     *     ),  
+     *   @OA\Response(
+     *       response=200,
+     *       description="Returns success message",
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *          @OA\Schema(
+     *                     @OA\Property(
+     *                         property="message",
+     *                         description="Success message",
+     *                         type="string",
+     *                         example="Book deleted"
+     *                    ),                  
+     *          ),
+     *      ),
+     *   )
+     * )
      */
     public function destroy(Book $book)
     {

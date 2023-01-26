@@ -8,6 +8,7 @@ use App\Http\Requests\BookStoreRequest;
 use App\Http\Requests\BookListStoreRequest;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\BookResource;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -25,6 +26,18 @@ class BookController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function favoriteBooks()
+    {
+        $user = Auth::user();
+        $books = $user->books;
+        return BookResource::collection($books);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,6 +47,19 @@ class BookController extends Controller
     {
         $book = Book::create($request->all());
         return $book;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Models\Book  $book
+     * @return \Illuminate\Http\Response
+     */
+    public function addFavorite(Book $book)
+    {
+        $user = Auth::user();
+        $user->books()->save($book);
+        return response()->json(["message" => "Books added to favorites"], Response::HTTP_OK);
     }
 
     /**

@@ -29,4 +29,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/books', [BookController::class, 'index']);
 
     Route::delete('/books/{book}', [BookController::class, 'destroy']);
+
+    Route::post('/books/{book}/favorite', [BookController::class, 'addFavorite']);
+    
+    Route::get('/books/favorites', [BookController::class, 'favoriteBooks']);
 }); 
